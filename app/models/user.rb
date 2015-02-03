@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
   after_create :sign_up_for_mailing_list
+  attr_accessor :stripe_token
 
   def set_default_role
     self.role ||= :user
