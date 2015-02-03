@@ -1,7 +1,7 @@
 class PaymentJob < ActiveJob::Base
 
   def perform(user)
-    user.make_payment
+    MakePaymentService.new.perform(user)
   end
 
 end
