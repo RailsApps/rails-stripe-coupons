@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203143634) do
+ActiveRecord::Schema.define(version: 20150203152251) do
 
   create_table "coupons", force: :cascade do |t|
     t.string   "code"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150203143634) do
     t.string   "name"
     t.integer  "role"
     t.integer  "coupon_id"
+    t.string   "stripe_token"
   end
 
   add_index "users", ["coupon_id"], name: "index_users_on_coupon_id"
