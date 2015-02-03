@@ -1,0 +1,29 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+Stripe.setPublishableKey("<%= Rails.application.secrets.stripe_publishable_key or fail 'No Stripe publishable key found.' %>")
+</script>
+<script type="text/javascript">
+  var stripeResponseHandler = function(status, response) {
+    var $form = $('.payment-form');
+    if (response.error) {
+      $form.find('#stripe_error').text(response.error.message).show();
+      $form.find('button').prop('disabled', false);
+    } else {
+      var token = response.id;
+      $('#user_stripe_token').val(token);
+      $form.get(0).submit();
+    }
+  };
+  jQuery(function($) {
+    $('.payment-form').submit(function(e) {
+      var $form = $(this);
+      $form.find('button').prop('disabled', true);
+      if ($('#card_number').length) {
+        Stripe.card.createToken($form, stripeResponseHandler);
+        return false;
+      } else {
+        return true;
+      }
+    });
+  });
+</script>

@@ -9,5 +9,5 @@
   <% end %>
 <% else %>
   <h3>Sign up and download a free book.</h3>
-  <%= link_to 'Sign up', new_user_registration_path, :class => 'btn btn-primary btn-large' %>
+  <%= link_to 'Sign up', new_user_registration_path, :class => 'btn btn-primary btn-large', data: { no_turbolink: true } %>
 <% end %>

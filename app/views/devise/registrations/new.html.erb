@@ -1,6 +1,10 @@
+<% content_for :head do %>
+  <%= render 'javascript' %>
+<% end %>
 <div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form', :class => 'payment-form'}) do |f| %>
     <h3>Sign up</h3>
+    <div id='stripe_error' class='alert alert-danger' style='display:none' ></div>
     <%= devise_error_messages! %>
     <div class="form-group">
       <%= f.label :email %>
@@ -14,6 +18,26 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
-     <%= f.submit 'Sign up', :class => 'button right' %>
+    <% if resource.stripe_token %>
+      <p>Credit card acceptance is pending.</p>
+    <% else %>
+      <div class="form-group">
+        <%= label_tag :card_number, "Credit Card Number" %>
+        <%= text_field_tag :card_number, nil, name: nil, class: 'form-control', data: { stripe: 'number' } %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :card_code, "Card Security Code" %>
+        <%= text_field_tag :card_code, nil, name: nil, class: 'form-control', data: { stripe: 'cvc' } %>
+      </div>
+      <br />
+      <div class="form-group">
+        <%= label_tag :card_month, "Card Expiry" %>
+        <%= select_month nil, { use_two_digit_numbers: true}, { name: nil, 'data-stripe': 'exp-month' } %>
+        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+10}, { name: nil, 'data-stripe': 'exp-year' } %>
+      </div>
+    <% end %>
+    <br />
+    <%= f.hidden_field :stripe_token %>
+    <%= f.submit 'Sign up', :class => 'button right' %>
   <% end %>
 </div>
