@@ -6,7 +6,7 @@ class MakePaymentService
       raise ActiveRecord::RecordInvalid.new(user)
     end
     customer = create_customer(user)
-    charge = create_charge(customer)
+    charge = create_charge(customer, user)
     user.stripe_token = nil
     Rails.logger.info("Stripe transaction for #{user.email}") if charge[:paid] == true
   rescue Stripe::InvalidRequestError => e
@@ -26,8 +26,9 @@ class MakePaymentService
     )
   end
 
-  def create_charge(customer)
-    price = Rails.application.secrets.product_price
+  def create_charge(customer, user)
+    price = user.coupon.nil? ?
+      Rails.application.secrets.product_price : user.coupon.price
     title = Rails.application.secrets.product_title
     charge = Stripe::Charge.create(
       :customer    => customer.id,

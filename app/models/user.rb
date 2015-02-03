@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
-  before_create :make_payment, unless: Proc.new { |user| user.admin? }
   after_validation :set_coupon
+  before_create :make_payment, unless: Proc.new { |user| user.admin? }
   # after_create :sign_up_for_mailing_list
   attr_accessor :stripe_token
 
@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def make_payment
+    return if self.coupon.price == 0
     MakePaymentService.new.perform(self)
   end
 
