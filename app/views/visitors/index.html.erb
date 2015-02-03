@@ -4,10 +4,17 @@
     <h3>Admin</h3>
     <p><%= link_to 'User count:', users_path %> <%= User.count %></p>
   <% else %>
-    <h3>You've signed up. Download a free book.</h3>
+    <h3>Download the book.</h3>
     <%= link_to 'Download PDF', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
   <% end %>
 <% else %>
-  <h3>Sign up and download a free book.</h3>
-  <%= link_to 'Sign up', new_user_registration_path, :class => 'btn btn-primary btn-large', data: { no_turbolink: true } %>
+  <h3>Purchase the book.</h3>
+  <article>
+    <label class="amount">
+      <%= image_tag 'rubyonrails.png', size: '60x60' %>
+      <div><%= Rails.application.secrets.product_title %></div>
+      <div><%= number_to_currency(Rails.application.secrets.product_price.to_f/100) %></div>
+    </label>
+    <%= render :partial => 'purchase' %>
+  </article>
 <% end %>
