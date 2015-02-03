@@ -37,6 +37,12 @@
       </div>
     <% end %>
     <br />
+    <%= f.fields_for :coupon do |ff| %>
+      <div class="form-group">
+        <%= ff.label 'Coupon code' %>
+        <%= ff.text_field :code, :class => 'form-control' %>
+      </div>
+    <% end %>
     <%= f.hidden_field :stripe_token %>
     <%= f.submit 'Sign up', :class => 'button right' %>
   <% end %>

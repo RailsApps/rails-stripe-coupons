@@ -2,11 +2,23 @@ class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
   before_create :make_payment, unless: Proc.new { |user| user.admin? }
+  after_validation :set_coupon
   # after_create :sign_up_for_mailing_list
   attr_accessor :stripe_token
 
+  belongs_to :coupon
+  accepts_nested_attributes_for :coupon
+  validates_associated :coupon
+
   def set_default_role
     self.role ||= :user
+  end
+
+  def set_coupon
+    return false if errors.any?
+    return false if self.coupon.nil?
+    coupon = Coupon.find_by code: self.coupon.code
+    self.coupon = coupon
   end
 
   # Include default devise modules. Others available are:

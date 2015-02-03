@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203134604) do
+ActiveRecord::Schema.define(version: 20150203143634) do
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "code"
+    t.string   "role"
+    t.string   "mailing_list_id"
+    t.string   "list_group"
+    t.integer  "price"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,8 +38,10 @@ ActiveRecord::Schema.define(version: 20150203134604) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "role"
+    t.integer  "coupon_id"
   end
 
+  add_index "users", ["coupon_id"], name: "index_users_on_coupon_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
