@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Download Offer</title>
+<link rel="stylesheet" media="all" href="/assets/application.css" />
+  </head>
+  <body>
+    <main role="main">
+      <div class="authform">
+        <form role="form" class="payment-form" id="new_user" action="/users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+          <h3>Free Download</h3>
+          <div class="form-group">
+            <label for="user_email">Email</label>
+            <input class="form-control" type="email" value="" name="user[email]" id="user_email" />
+          </div>
+          <div class="form-group">
+            <label for="user_password">Password</label>
+            <input class="form-control" type="password" name="user[password]" id="user_password" />
+          </div>
+          <div class="form-group">
+            <label for="user_password_confirmation">Password confirmation</label>
+            <input class="form-control" type="password" name="user[password_confirmation]" id="user_password_confirmation" />
+          </div>
+          <div class="form-group">
+            <label for="user_coupon_attributes_code">Invitation code</label>
+            <input class="form-control" type="text" name="user[coupon_attributes][code]" id="user_coupon_attributes_code" />
+          </div>
+          <p>No invitation code? You can <a href="/">purchase the book</a>.</p>
+          <input type="submit" name="commit" value="Sign up" class="button right" />
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

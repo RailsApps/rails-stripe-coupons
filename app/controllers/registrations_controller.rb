@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  protect_from_forgery :except => :create
+
   def new
     build_resource({})
     yield resource if block_given?
