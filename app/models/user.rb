@@ -2,9 +2,8 @@ class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
   after_validation :set_coupon
-  before_create :make_payment, unless: Proc.new { |user| user.admin? }
+  after_create :payment_job, unless: Proc.new { |user| user.admin? }
   # after_create :sign_up_for_mailing_list
-  attr_accessor :stripe_token
 
   belongs_to :coupon
   accepts_nested_attributes_for :coupon
@@ -26,8 +25,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def make_payment
+  def payment_job
     return if self.coupon.price == 0
+    PaymentJob.perform_later(self)
+  end
+
+  def make_payment
     MakePaymentService.new.perform(self)
   end
 
