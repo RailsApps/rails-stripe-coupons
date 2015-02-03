@@ -16,7 +16,9 @@ end
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'gibbon'
+gem 'high_voltage'
 gem 'sucker_punch'
+gem 'stripe'
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
