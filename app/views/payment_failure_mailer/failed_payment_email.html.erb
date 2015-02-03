@@ -1,0 +1,10 @@
+<h1>Payment Failed</h1>
+<p>
+  Your payment failed for purchase of <%= Rails.application.secrets.product_title %>.
+</p>
+<p>
+  The payment processor reported:
+</p>
+<p>
+  "<%= user.errors[:base] %>"
+</p>
