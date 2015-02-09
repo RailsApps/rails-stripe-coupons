@@ -6,6 +6,8 @@ See the tutorial for a complete explanation of the code:
 
 * "*Stripe JS With Coupons*":https://tutorials.railsapps.org/rails-stripe-coupons
 
+This is a complex application. To understand the code, you'll need the tutorial.
+
 The application uses:
 
 * "Stripe":https://stripe.com/ for credit card payment processing
@@ -39,6 +41,33 @@ The application requires a database. The example application uses SQLite with Ra
 h4. Front-end Framework
 
 The example application integrates Bootstrap for a navigation bar and flash messages. The forms are set up to use Bootstrap. You can customize the application to use other front-end frameworks such as Zurb Foundation.
+
+h2. What's Here
+
+Stripe offers two approaches to implementing payment processing. "Stripe Checkout":https://stripe.com/checkout is Stripe’s entry-level approach. Stripe Checkout competes with the button-based payment options from Google, PayPal, or Amazon, adding a pop-up payment form to any web page. Stripe Checkout is very limited because the pop-up payment form cannot be customized for use with a Rails application. Our "Stripe Checkout Tutorial":https://tutorials.railsapps.org/tutorials/rails-stripe-checkout shows how to combine Stripe Checkout with Devise for simple applications.
+
+"Stripe.js":https://stripe.com/docs/stripe.js is optimal for use with a Rails application, allowing full customization of a payment form and integration with Rails form processing. The rails-stripe-coupon application implements a payment feature using Stripe JS so a visitor pays to download a PDF file. The application accommodates promotional coupons and adds payment forms to landing pages, for real-world payment processing.
+
+The application offers these features:
+
+* welcome page offers an ebook for sale
+* visitor enters an email address and password to create an account
+* visitor enters credit card information and payment is processed by Stripe
+* the user can download a digital product
+* the user can return to the site and repeat the download if needed
+
+Additionally:
+
+* * background processing adds the email address to a mailing list
+background processing completes payment for a speedy response
+* multiple landing pages can accommodate different offers
+* provide coupons for promotional discounts or free downloads
+
+In addition to covering coupons, free downloads, landing pages, and background processing, the tutorial shows how to refactor the application, illustrating an application architecture favored by experienced Rails developers.
+
+h2. What Is Not Here
+
+This application does not provide a shopping cart for purchasing multiple products with a single transaction. It also doesn’t provide recurring billing for a subscription site.
 
 h2. Similar Examples and Tutorials
 
