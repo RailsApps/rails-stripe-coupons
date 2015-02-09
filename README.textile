@@ -58,10 +58,10 @@ The application offers these features:
 
 Additionally:
 
-* * background processing adds the email address to a mailing list
-background processing completes payment for a speedy response
+* background processing adds the email address to a mailing list
+* background processing completes payment for a speedy response
 * multiple landing pages can accommodate different offers
-* provide coupons for promotional discounts or free downloads
+* you can provide coupons for promotional discounts or free downloads
 
 In addition to covering coupons, free downloads, landing pages, and background processing, the tutorial shows how to refactor the application, illustrating an application architecture favored by experienced Rails developers.
 
