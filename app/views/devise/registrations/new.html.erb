@@ -7,6 +7,10 @@
     <div id='stripe_error' class='alert alert-danger' style='display:none' ></div>
     <%= devise_error_messages! %>
     <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+    </div>
+    <div class="form-group">
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
     </div>
