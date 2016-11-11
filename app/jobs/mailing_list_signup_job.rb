@@ -1,4 +1,4 @@
-class MailingListSignupJob < ActiveJob::Base
+class MailingListSignupJob < ApplicationJob
 
   def perform(user)
     MailingListSignupService.new.perform(user)

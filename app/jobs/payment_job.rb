@@ -1,4 +1,4 @@
-class PaymentJob < ActiveJob::Base
+class PaymentJob < ApplicationJob
 
   def perform(user)
     MakePaymentService.new.perform(user)
